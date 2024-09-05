@@ -97,6 +97,49 @@ public class PostServiceImpl implements PostService{
 		
 	}
 
+
+	@Override
+	public void deletePostById(Integer postId) {
+		Post p = postDao.findById(postId).orElseThrow(() -> new NoDataFoundException("Post", "postId", postId.toString()));
+		postDao.delete(p);
+	}
+
+
+	@Override
+	public List<PostModel> getPostByUser(Integer userId) {
+		User u = userDao.findById(userId).orElseThrow(() -> new NoDataFoundException("User", "userId", userId.toString()));
+		List<Post> response = postDao.findPostByUser(u);
+		List<PostModel> list = new ArrayList<>();
+		for(Post p : response) { list.add(modelMapper.map(p, PostModel.class)); }
+		return list;
+	}
+
+
+	@Override
+	public List<PostModel> getPostByCategory(Integer categoryId) {
+		Category c = categoryDao.findById(categoryId).orElseThrow(()-> new NoDataFoundException("Category", "No categoryId found", categoryId.toString()));
+		List<Post> response = postDao.findPostByCategory(c);
+		List<PostModel> list = new ArrayList<>();
+		for(Post p : response) { list.add(modelMapper.map(p, PostModel.class)); }
+		return list;
+	}
+
+
+	@Override
+	public PostModel getPostByPostId(Integer postId) {
+		Post p = postDao.findById(postId).orElseThrow(() -> new NoDataFoundException("Post", "postId", postId.toString()));
+		return modelMapper.map(p, PostModel.class);
+	}
+
+
+	@Override
+	public List<PostModel> searchPosts(String keyword) {
+		List<Post> response = postDao.getPostByTitleContaining(keyword);
+		List<PostModel> list = new ArrayList<>();
+		for(Post p : response) { list.add(modelMapper.map(p, PostModel.class)); }
+		return list;
+	}
+
 	
 
 }

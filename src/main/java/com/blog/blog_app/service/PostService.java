@@ -11,4 +11,11 @@ PostModel createPost(PostModel model, Integer userId, Integer categoryId);
 PostModel updatePost(PostModel model, Integer postId);
 
 PostResponse getAllPosts(Integer pageNum, Integer pageSize, String sortBy, String dir);
+
+void deletePostById(Integer id);
+
+List<PostModel> getPostByUser(Integer userId);
+List<PostModel> getPostByCategory(Integer categoryId);
+PostModel getPostByPostId(Integer postId);
+List<PostModel> searchPosts(String keyword);
 }
