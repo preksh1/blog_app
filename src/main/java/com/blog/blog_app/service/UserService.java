@@ -10,4 +10,5 @@ List<UserModel> getAllUsers();
 UserModel getUserById(Integer id);
 UserModel updateUser(UserModel user, Integer id);
 void deleteById(Integer id);
+
 }
