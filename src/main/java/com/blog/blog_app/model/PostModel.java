@@ -1,6 +1,10 @@
 package com.blog.blog_app.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.blog.blog_app.entity.Comment;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +22,6 @@ private Date addedDate;
 
 private UserModel user;
 private CategoryModel category;
+
+private Set<CommentModel> comments = new HashSet<>();
 }

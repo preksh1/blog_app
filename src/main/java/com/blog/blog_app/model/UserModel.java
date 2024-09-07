@@ -1,6 +1,9 @@
 package com.blog.blog_app.model;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -28,5 +31,7 @@ private String email;
 private String password;
 @NotNull
 private String about;
+
+private Set<CommentModel> comments = new HashSet<>();
 
 }

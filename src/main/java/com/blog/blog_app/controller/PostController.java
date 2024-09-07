@@ -1,11 +1,16 @@
 package com.blog.blog_app.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +19,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.blog_app.model.CategoryModel;
 import com.blog.blog_app.model.PostModel;
 import com.blog.blog_app.model.PostResponse;
 import com.blog.blog_app.model.UserModel;
+import com.blog.blog_app.service.FileService;
 import com.blog.blog_app.service.PostService;
 
 import io.micrometer.common.util.StringUtils;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,6 +39,13 @@ import jakarta.validation.Valid;
 public class PostController {
 @Autowired
 private PostService postService;
+
+@Value("project.image")
+private String path;
+
+@Autowired
+private FileService fileService;
+
 
 @PostMapping("/create")
 ResponseEntity<PostModel> createPost(@Valid @RequestBody PostModel post, @RequestParam(required=true) Integer userId, @RequestParam Integer categoryId){
@@ -91,5 +107,25 @@ ResponseEntity<List<PostModel>> getPostByTileContaining(@PathVariable String key
 	List<PostModel> response = postService.searchPosts(keyword);
 	return ResponseEntity.ok(response);
 }
+
+
+@PostMapping("/image/upload/{postId}")
+public ResponseEntity<PostModel> uploadPostImage(
+		@RequestPart("file") MultipartFile image,
+		@PathVariable Integer postId) throws IOException
+		{
+			PostModel post = postService.getPostByPostId(postId);
+			String fileName = fileService.uploadImage(path, image);
+			post.setImageName(fileName);
+			PostModel updatedPost = postService.updatePost(post, postId);
+			return new ResponseEntity<>(updatedPost, HttpStatus.OK);
+		}
+@GetMapping(value = "/image/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+public void downloadImage(@PathVariable String imageName, HttpServletResponse response) throws IOException {
+	InputStream resource = fileService.downlaodImage(path, imageName);
+	response.setContentType(MediaType.IMAGE_PNG_VALUE);
+	StreamUtils.copy(resource, response.getOutputStream());
+}
+
 
 }
