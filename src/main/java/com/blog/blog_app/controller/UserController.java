@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.blog.blog_app.model.UserModel;
 import com.blog.blog_app.service.UserService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users/")

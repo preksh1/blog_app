@@ -17,7 +17,7 @@ import com.blog.blog_app.model.CommentModel;
 import com.blog.blog_app.model.PostModel;
 import com.blog.blog_app.service.CommentService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/comments")

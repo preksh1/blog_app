@@ -30,9 +30,9 @@ import com.blog.blog_app.model.UserModel;
 import com.blog.blog_app.service.FileService;
 import com.blog.blog_app.service.PostService;
 
-import io.micrometer.common.util.StringUtils;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/posts")

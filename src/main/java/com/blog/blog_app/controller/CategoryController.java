@@ -19,7 +19,7 @@ import com.blog.blog_app.model.CategoryModel;
 import com.blog.blog_app.model.UserModel;
 import com.blog.blog_app.service.CategoryService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/categories/")
