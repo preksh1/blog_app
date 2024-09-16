@@ -20,7 +20,7 @@ import com.blog.blog_app.model.JwtAuthRequest;
 import com.blog.blog_app.model.JwtAuthResponse;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class LoginApi {
 private Logger logger = LoggerFactory.getLogger(LoginApi.class);
 

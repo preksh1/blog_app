@@ -103,6 +103,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>blogg-app-docker</finalName>
 	</build>
 
 </project>
