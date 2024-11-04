@@ -103,7 +103,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>blogg-app-docker</finalName>
+		<finalName>springboot-example</finalName>
 	</build>
 
 </project>

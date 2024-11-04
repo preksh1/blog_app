@@ -1,0 +1,71 @@
+# Define a 'Persistent Volume Claim'(PVC) for MySQL Storage, dynamically provisioned by cluster
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql8-pv-claim # name of PVC essential for identifying the storage data
+  labels:
+    app: mysql8
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce   #This specifies the mode of the claim that we are trying to create.
+  resources:
+    requests:
+      storage: 1Gi    #This will tell kubernetes about the amount of space we are trying to claim.
+# Deployment specification begins here
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql8
+  labels:
+    app: mysql8
+    tier: database
+spec:
+  selector: # mySQL Pod Should contain same labels
+    matchLabels:
+      app: mysql8
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' selectors
+        app: mysql8
+        tier: database
+    spec:
+      containers:
+        - name: mysql8
+          image: mysql
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_DATABASE
+              value: blogapplication
+          ports:
+            - containerPort: 3307
+              name: mysql8
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql8-persistance-storage
+      volumes:
+        - name: mysql8-persistance-storage
+          persistentVolumeClaim:
+            claimName: mysql8-pv-claim
+---
+# Define a 'Service' To Expose MySQL to Other Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql8
+  labels:
+    app: mysql8
+    tier: database
+spec:
+  ports:
+    - port: 3307
+      targetPort: 3307
+  selector:
+    app: mysql8
+    tier: database
+  clusterIP: None # DNS is used, so clusterIP is not needed
