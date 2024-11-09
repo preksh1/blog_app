@@ -57,13 +57,13 @@ jobs:
           service: spring-boot-example-service
           cluster: DevCluster1
           wait-for-service-stability: true
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: 'springboot-example-app'
-          environment_name: 'Springboot-example-app-env'
-          version_label: ${{ github.sha }}
-          region: ap-south-1
-          deployment_package: target/springboot-example.jar
+      # - name: Deploy to EB
+      #   uses: einaregilsson/beanstalk-deploy@v21
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     application_name: 'springboot-example-app'
+      #     environment_name: 'Springboot-example-app-env'
+      #     version_label: ${{ github.sha }}
+      #     region: ap-south-1
+      #     deployment_package: target/springboot-example.jar
