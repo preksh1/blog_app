@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:277707111045:task-definition/spring-boot-task-definition:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:471112935792:task-definition/spring-boot-task-definition:1",
     "containerDefinitions": [
         {
             "name": "springboot-example",
-            "image": "277707111045.dkr.ecr.us-east-2.amazonaws.com/springboot-example:latest",
+            "image": "471112935792.dkr.ecr.us-east-1.amazonaws.com/springboot-example:latest",
             "cpu": 0,
             "portMappings": [
                 {
@@ -27,7 +27,7 @@
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
-                    "awslogs-region": "us-east-2",
+                    "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
                 },
                 "secretOptions": []
@@ -36,8 +36,8 @@
         }
     ],
     "family": "spring-boot-task-definition",
-    "taskRoleArn": "arn:aws:iam::277707111045:role/ecsTaskExecutionRole",
-    "executionRoleArn": "arn:aws:iam::277707111045:role/ecsTaskExecutionRole",
+    "taskRoleArn": "arn:aws:iam::471112935792:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::471112935792:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
     "volumes": [],
@@ -88,7 +88,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-11-19T18:42:37.168Z",
-    "registeredBy": "arn:aws:iam::277707111045:user/dev",
+    "registeredAt": "2024-11-29T01:02:54.015Z",
+    "registeredBy": "arn:aws:iam::471112935792:user/preksha2",
     "tags": []
 }
