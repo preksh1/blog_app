@@ -12,11 +12,9 @@ Complex DB Structure (JPA Entities)<br>
 Role Based Authentication<br>
 Handle Exception<br>
 Use DTO for Data Transfer<br>
-Implement Swagger<br>
 Add Profiles for Different Environment<br>
 Deploy Spring Boot In Production Environment<br>
 Dockerize the application<br>
-Deploy to Kubernetes<br>
 Build CI/CD pipelines using Github Actions.<br>
 Deploy to AWS Fargate, EBS<br>
 And implement various other scopes.<br>
